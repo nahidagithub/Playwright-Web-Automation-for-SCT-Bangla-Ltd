@@ -124,7 +124,7 @@ await expect(page.locator('#addGroupDialog > ui5-dialog')).toBeVisible();
 
 });
 
-test.only('TC 07 - Verify creating new structure', async ({ page }) => {
+test('TC 07 - Verify creating new structure', async ({ page }) => {
   await page.goto('http://skt.test.local/en/login');
 
   await page
@@ -212,7 +212,99 @@ await page
 
 });
 
+test('TC 09 - Verify clicking any section', async ({ page }) => {
+
+  await page.goto('http://skt.test.local/en/login');
+
+  await page
+  .locator('app-login-page ui5-dialog input')
+  .first()
+  .fill('nahida');
+
+
+  await page.locator('[name="password"]').fill('1234');
+  //await page.pause();
+
+ await page.locator('ui5-dialog.dialog-container').getByRole('button', { name: 'Login', exact: true }).click();
+ //await page.getByRole('button', { name: 'Login' }).click();
+
+await page.locator('#DocVisu > ui5-card > a').click();
+await page.getByText('newDocument', { exact: true }).click();
+
+});
+
+test('TC 10 - Verify clicking New button and pop up model open', async ({ page }) => {
+
+  await page.goto('http://skt.test.local/en/login');
+
+  await page
+  .locator('app-login-page ui5-dialog input')
+  .first()
+  .fill('nahida');
+
+
+  await page.locator('[name="password"]').fill('1234');
+  //await page.pause();
+
+ await page.locator('ui5-dialog.dialog-container').getByRole('button', { name: 'Login', exact: true }).click();
+ //await page.getByRole('button', { name: 'Login' }).click();
+
+await page.locator('#DocVisu > ui5-card > a').click();
+await page.getByText('newDocument', { exact: true }).click();
+await page.locator('#newButton').click();
+
+//Assertion
+await expect(
+  page.locator('ui5-dialog[open]')
+).toBeVisible();
+
+});
+
+test.only('TC 11 - Verify creating new record in the screen', async ({ page }) => {
+
+  await page.goto('http://skt.test.local/en/login');
+
+  await page
+  .locator('app-login-page ui5-dialog input')
+  .first()
+  .fill('nahida');
+
+
+  await page.locator('[name="password"]').fill('1234');
+  //await page.pause();
+
+ await page.locator('ui5-dialog.dialog-container').getByRole('button', { name: 'Login', exact: true }).click();
+ //await page.getByRole('button', { name: 'Login' }).click();
+
+await page.locator('#DocVisu > ui5-card > a').click();
+await page.getByText('newDocument', { exact: true }).click();
+await page.locator('#newButton').click();
+
+
+await page
+  .locator('ui5-dialog[open]')
+  .locator('ui5-label:has-text("Name")')
+  .locator('xpath=following-sibling::ui5-input')
+  .locator('input.inner-input')
+  .fill('TestDocument');
+  await page.waitForTimeout(5000)
+  await page.locator('ui5-dialog[open] #saveButton').click();
+ 
+
+});
+
 })
+
+
+
+
+
+
+
+
+
+
+
 
 
 
