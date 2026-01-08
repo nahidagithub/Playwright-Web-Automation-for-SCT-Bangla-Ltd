@@ -260,7 +260,7 @@ await expect(
 
 });
 
-test.only('TC 11 - Verify creating new record in the screen', async ({ page }) => {
+test('TC 11 - Verify creating new record in the screen', async ({ page }) => {
 
   await page.goto('http://skt.test.local/en/login');
 
