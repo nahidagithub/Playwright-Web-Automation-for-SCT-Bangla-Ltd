@@ -286,9 +286,9 @@ await page
   .locator('ui5-label:text-is("Name")')
   .locator('~ ui5-input')
   .locator('input')
-  .fill('My New Document');
+  .fill('NewDocument');
 
-await page.waitForTimeout(3000);
+await page.waitForTimeout(2000);
 
 
 
