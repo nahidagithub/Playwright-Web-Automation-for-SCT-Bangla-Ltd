@@ -124,7 +124,7 @@ await expect(page.locator('#addGroupDialog > ui5-dialog')).toBeVisible();
 
 });
 
-test('TC 07 - Verify creating new structure', async ({ page }) => {
+test('TC 07 - Verify creating new Directory structure', async ({ page }) => {
   await page.goto('http://skt.test.local/en/login');
 
   await page
@@ -283,28 +283,30 @@ await page.locator('#newButton').click();
 
 await page
   .locator('ui5-dialog[open]')
-  .locator('ui5-label:has-text("Name")')
-  .locator('xpath=following-sibling::ui5-input')
-  .locator('input.inner-input')
-  .fill('TestDocument');
-  await page.waitForTimeout(5000)
-  await page.locator('ui5-dialog[open] #saveButton').click();
- 
+  .locator('ui5-label:text-is("Name")')
+  .locator('~ ui5-input')
+  .locator('input')
+  .fill('My New Document');
+
+await page.waitForTimeout(3000);
+
+
+
+
+  /*
+await page
+  .locator('ui5-dialog[open]')
+  .getByRole('textbox')
+  .nth(1)
+  .fill('NewDocument');
+ */
+await page.waitForTimeout(3000)
+await page.locator('ui5-dialog[open] #saveButton').click();
 
 });
 
+
 })
-
-
-
-
-
-
-
-
-
-
-
 
 
 
